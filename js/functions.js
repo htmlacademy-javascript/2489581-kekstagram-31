@@ -38,3 +38,24 @@ let polindrome = function (string) {
     return false;
   }
 };
+
+const meetingOnlyDuringBusinessHours = (startOfWork, endOfWork, startMeeting, durationMeetingMinutes) => {
+  const hoursToMinutes = (time) => {
+      const timeToArray = time.split(':');
+      const hoursToNumber = parseInt(timeToArray[0]);
+      const minutesToNumber = parseInt(timeToArray[1]);
+      return hoursToNumber * 60 + minutesToNumber;
+  };
+
+  const startOfWorkMinutes = hoursToMinutes(startOfWork);
+  const endOfWorkMinutes = hoursToMinutes(endOfWork);
+  const startMeetingMinutes = hoursToMinutes(startMeeting);
+  const endMeetingMinutes = hoursToMinutes(startMeeting) + durationMeetingMinutes;
+
+  if (startMeetingMinutes >= startOfWorkMinutes && endMeetingMinutes < endOfWorkMinutes) {
+      return true;
+  }
+   return false;
+};
+
+console.log(meetingOnlyDuringBusinessHours('08:00', '17:30', '14:00', 90));
